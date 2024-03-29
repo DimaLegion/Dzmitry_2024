@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block page_content %}
+<div class="col-md-8 offset-md-2">
+        <h2>{{ blog.title }}</h2>
+        <h5>Название чуда света:</h5>     <!--Title-->
+        <p>{{ blog.title }}</p>
+        <br>
+        <h5>Описание:</h5>  <!--body-->
+        <p>{{ blog.body }}</p>
+        <br>
+        <h5>Создан:</h5>  <!--created_on-->
+        <p>{{ blog.created_on }}</p>
+        <br>
+        <h5>Изменен:</h5>     <!--last_modified-->
+        <p>{{ blog.last_modified }}</p>
+        <br>
+        <form action="/blog/{{ blog.pk }}/" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                        {{ form.author }}
+                </div>
+                <div class="form-group">
+                        {{ form.body }}
+                </div>
+                <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+        <h5>Комментарии:</h5>
+        {% for com in coms %}
+        <a href="">
+                <h5>оставил(а): {{ com }}</h5>
+        </a>
+        <p>{{ com.body }}</p>
+        <a href="">
+        <p>Создан: {{ com.created_on }}</p>
+        </a>
+        {% endfor %}
+</div>
+{% endblock %}

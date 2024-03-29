@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block page_content %}
+<h1>Посты к чудесам света:</h1>
+    {% for blog in blogs %}
+    <h4>{{ blog.title }}</h4>
+    <small>
+      Категория:
+      {% for category in blog.categories.all %}
+      <a href="">
+          {{ category.name }}
+      </a>
+      {% endfor %}
+    </small>
+    <br>
+    <h8>{{blog.created_on}}</h8>
+    <a href="{% url 'blog_detail' blog.pk %}"
+       class="btn btn-primary">
+        Подробнее
+    </a>
+    <p>{{ blog.body | slice:":400" }}...</p>
+{% endfor %}
+{% endblock %}
